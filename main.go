@@ -21,7 +21,7 @@ func main() {
 	fs_images := http.FileServer(http.Dir("./public/images"))
 	fs := http.FileServer(http.Dir("./front-end/build"))
 	http.HandleFunc("/cats", apiResponse)
-	http.Handle("/images", fs_images)
+	http.Handle("/images/", http.StripPrefix("/images/", fs_images))
 	http.Handle("/", fs)
 
 	log.Println("Listening on :8080...")
